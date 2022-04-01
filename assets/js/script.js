@@ -1,7 +1,9 @@
 var apiKey = "ba7e894de92ecba7bd4c5eb8943840a3"
-var city = "Milwaukee"
+var citySearch = document.getElementById("city-search")
+var searchBtn = document.getElementById("search-btn")
 
-var getLocationData = function() {
+
+var getLocationData = function(city) {
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`)
     .then(function(response) {
         return response.json()
@@ -22,4 +24,10 @@ var getCurrentWeather = function(lat, lon) {
     })
 }
 
-getLocationData()
+var getCity = function() {
+    var newCity = citySearch.value
+    getLocationData(newCity);
+}
+
+
+searchBtn.addEventListener("click", getCity)
