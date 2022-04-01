@@ -1,0 +1,77 @@
+:root {
+    --border-radius: 5px;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+header {
+    background-color: blue;
+    background-image: linear-gradient(darkblue, rgb(36, 134, 167));
+    color: white;
+    width: 100%;
+    text-align: center;
+    font-size: x-large;
+    padding: 12px 0;
+    text-shadow: 2px 2px 4px black;
+    margin-bottom: 10px;
+}
+
+main {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 20px;
+    margin: auto 10px;
+}
+
+.search {
+    display: flex;
+    flex-direction: column;
+    row-gap: 14px;;
+    grid-column: span 3;
+}
+
+.search h2 {
+    font-size: 2.2rem;
+}
+
+.search input {
+    border-radius: var(--border-radius);
+    height: 35px;
+    font-size: large;
+}
+
+.search-btn {
+    background-color: blue;
+    color: white;
+}
+
+.search button {
+    border-radius: var(--border-radius);
+    height: 35px;
+    font-size: large;
+    font-weight: bold
+}
+
+.previous-cities {
+    border-top: 2px solid grey;
+}
+
+.weather {
+    grid-column: span 9;
+}
+
+.current {
+    border: 2px solid black;
+    padding: 0 20px 20px 20px;
+    margin-bottom: 20px;
+    line-height: 3;
+}
+
+.current h2 {
+    font-size: 2.2rem;
+    line-height: 2;
+}
