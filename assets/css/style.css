@@ -24,7 +24,7 @@ main {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     column-gap: 20px;
-    margin: auto 10px;
+    margin: 10px 10px;
 }
 
 .search {
@@ -94,6 +94,25 @@ main {
     border-radius: var(--border-radius);
     padding: 3px 10px;
     opacity: 0;
+}
+
+.five-day h2 {
+    margin-bottom: 10px;
+}
+
+#five-day {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.card {
+    background-color: darkblue;
+    color: white;
+    padding: 5px 3px;
+    width: 150px;
 }
 
 @media (max-width: 900px) {
