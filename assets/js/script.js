@@ -38,6 +38,28 @@ var cityClickHandler = function(event) {
     getLocationData(cityName)
 }
 
+var loadCities = function() {
+    loadedCities = localStorage.getItem("Cities")
+    if (!loadedCities) {
+        return;
+    }
+    loadedCities = JSON.parse(loadedCities)
+    for (var i = 0; i < loadedCities.length; i++) {
+        generateSearchBtn(loadedCities[i])
+    }
+}
+
+var saveCity = function(city) {
+    var savedCities = localStorage.getItem("Cities")
+    if (!savedCities){
+        localStorage.setItem("Cities", JSON.stringify([city]))
+        return;
+    }
+    savedCities = JSON.parse(savedCities)
+    savedCities.push(city)
+    localStorage.setItem("Cities", JSON.stringify(savedCities))
+}
+
 var generateSearchBtn = function(city) {
     newButton = document.createElement("button")
     newButton.setAttribute("type", "button")
@@ -74,8 +96,9 @@ var getCity = function() {
     var newCity = citySearch.value
     getLocationData(newCity)
     generateSearchBtn(newCity)
+    saveCity(newCity)
     citySearch.value = ""
 }
 
-
+loadCities();
 searchBtn.addEventListener("click", getCity)
