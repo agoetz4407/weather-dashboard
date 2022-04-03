@@ -88,6 +88,15 @@ main {
     line-height: 2;
 }
 
+#uv-index {
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    border-radius: var(--border-radius);
+    padding: 3px 10px;
+    opacity: 0;
+}
+
 @media (max-width: 900px) {
     main {
         display: grid;
