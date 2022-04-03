@@ -35,7 +35,7 @@ main {
 }
 
 .search h2 {
-    font-size: 2.2rem;
+    font-size: 2rem;
 }
 
 .search input {
@@ -57,7 +57,19 @@ main {
 }
 
 .previous-cities {
-    border-top: 2px solid grey;
+    border-top: 2px solid lightgrey;
+    display: flex;
+    flex-direction: column;
+    row-gap: 14px;
+    padding-top: 14px;
+}
+
+.previous-cities button {
+    border-radius: var(--border-radius);
+    height: 35px;
+    font-size: large;
+    font-weight: bold;
+    background-color: lightgrey;
 }
 
 .weather {

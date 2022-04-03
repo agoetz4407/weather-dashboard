@@ -1,7 +1,21 @@
 var apiKey = "ba7e894de92ecba7bd4c5eb8943840a3"
 var citySearch = document.getElementById("city-search")
 var searchBtn = document.getElementById("search-btn")
+var previousCities = document.getElementById("previous-cities")
 
+var cityClickHandler = function(event) {
+    var cityName = event.target.getAttribute("data-city")
+    getLocationData(cityName)
+}
+
+var generateSearchBtn = function(city) {
+    newButton = document.createElement("button")
+    newButton.setAttribute("type", "button")
+    newButton.setAttribute("data-city", city)
+    newButton.innerText = city
+    previousCities.appendChild(newButton)
+    newButton.addEventListener("click", cityClickHandler)
+}
 
 var getLocationData = function(city) {
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`)
@@ -26,7 +40,9 @@ var getCurrentWeather = function(lat, lon) {
 
 var getCity = function() {
     var newCity = citySearch.value
-    getLocationData(newCity);
+    getLocationData(newCity)
+    generateSearchBtn(newCity)
+    citySearch.innerText = ""
 }
 
 
