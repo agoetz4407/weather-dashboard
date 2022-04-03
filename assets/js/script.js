@@ -16,8 +16,21 @@ var displayCurrentWeather = function(weatherData) {
     currentTemp.innerText = weatherData.current.temp
     currentWind.innerText = weatherData.current.wind_speed
     currentHumidity.innerText = weatherData.current.humidity
+    UVIndex = weatherData.current.uvi
     currentUVIndex.style.opacity = 1
-    currentUVIndex.innerText = weatherData.current.uvi
+    if (UVIndex < 3) {
+        currentUVIndex.style.backgroundColor = "green"
+    }
+    else if (UVIndex < 6) {
+        currentUVIndex.style.backgroundColor = "yellow"
+    }
+    else if (UVIndex < 8) {
+        currentUVIndex.style.backgroundColor = "orange"
+    }
+    else {
+        currentUVIndex.style.backgroundColor = "red"
+    }
+    currentUVIndex.innerText = UVIndex
 }
 
 var cityClickHandler = function(event) {

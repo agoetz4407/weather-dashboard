@@ -89,7 +89,6 @@ main {
 }
 
 #uv-index {
-    background-color: green;
     color: white;
     font-weight: bold;
     border-radius: var(--border-radius);
