@@ -43,7 +43,6 @@ var displayFiveDayWeather = function(weatherData) {
     newFiveDayContainer.setAttribute("id", "five-day")
     fiveDayForecast.appendChild(newFiveDayContainer)
     var fiveDayArr = weatherData.daily
-    console.log(fiveDayArr)
     for (var i = 1; i < 6; i++) {
          let weatherCard = document.createElement("div")
          weatherCard.classList.add("card")
@@ -112,7 +111,6 @@ var getLocationData = function(city) {
         return response.json()
     })
     .then(function(locationData) {
-        console.log(locationData)
         getCurrentWeather(locationData[0].lat, locationData[0].lon)
         currentCity.innerText = locationData[0].name + " (" + dayjs().format('MM/DD/YYYY') + ")"
     })
@@ -124,7 +122,6 @@ var getCurrentWeather = function(lat, lon) {
         return response.json()
     })
     .then(function(weatherData) {
-        console.log(weatherData)
         displayCurrentWeather(weatherData)
         displayFiveDayWeather(weatherData)
     })
