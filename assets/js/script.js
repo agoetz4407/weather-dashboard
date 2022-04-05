@@ -123,13 +123,19 @@ var generateSearchBtn = function(city) {
     previousCities.appendChild(newButton)
     newButton.addEventListener("click", cityClickHandler)
 }
+//network error handler
+var handleError = function(response) {
+    if (!response.ok) { 
+       throw Error(response.status);
+    } else {
+       return response.json();
+    }
+ }
 
 // getting location data of city to fetch weather
 var getLocationData = function(city) {
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`)
-    .then(function(response) {
-        return response.json()
-    })
+    .then(handleError)
     .then(function(locationData) {
         //checking if response was valid city or not
         if (locationData.length > 0) {
@@ -141,6 +147,7 @@ var getLocationData = function(city) {
             alert("Not a valid city name")
         }
     })
+    .catch(console.log)
 }
 
 //fetching weather for searched city based on lat and lon
