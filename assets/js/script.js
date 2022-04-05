@@ -1,3 +1,4 @@
+//global variables
 var apiKey = "ba7e894de92ecba7bd4c5eb8943840a3"
 var citySearch = document.getElementById("city-search")
 var searchBtn = document.getElementById("search-btn")
@@ -8,7 +9,7 @@ var currentWind = document.getElementById("wind")
 var currentHumidity = document.getElementById("humidity")
 var currentUVIndex = document.getElementById("uv-index")
 var fiveDayForecast = document.querySelector(".five-day")
-
+//displays current weather
 var displayCurrentWeather = function(weatherData) {
     var icon = document.createElement('img')
     var iconId = weatherData.current.weather[0].icon
@@ -33,7 +34,7 @@ var displayCurrentWeather = function(weatherData) {
     }
     currentUVIndex.innerText = UVIndex
 }
-
+//displays the 5 day forcast
 var displayFiveDayWeather = function(weatherData) {
     //clearing old data
     var oldFiveDayContainer = document.getElementById("five-day")
@@ -86,12 +87,12 @@ var checkSearchOrigin = function (city) {
     generateSearchBtn(city)
     saveCity(city)
 }
-
+//fuction for saved city button click
 var cityClickHandler = function(event) {
     var cityName = event.target.getAttribute("data-city")
     getLocationData(cityName)
 }
-
+//loads cities saved in local storage and generates button for each one
 var loadCities = function() {
     var loadedCities = localStorage.getItem("Cities")
     if (!loadedCities) {
@@ -102,7 +103,7 @@ var loadCities = function() {
         generateSearchBtn(loadedCities[i])
     }
 }
-
+//saves new city
 var saveCity = function(city) {
     var savedCities = localStorage.getItem("Cities")
     if (!savedCities){
@@ -113,7 +114,7 @@ var saveCity = function(city) {
     savedCities.push(city)
     localStorage.setItem("Cities", JSON.stringify(savedCities))
 }
-
+// generates button for a new searched city
 var generateSearchBtn = function(city) {
     var newButton = document.createElement("button")
     newButton.setAttribute("type", "button")
@@ -123,14 +124,14 @@ var generateSearchBtn = function(city) {
     newButton.addEventListener("click", cityClickHandler)
 }
 
+// getting location data of city to fetch weather
 var getLocationData = function(city) {
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`)
     .then(function(response) {
-        console.log(response)
         return response.json()
     })
     .then(function(locationData) {
-        console.log(locationData)
+        //checking if response was valid city or not
         if (locationData.length > 0) {
             getCurrentWeather(locationData[0].lat, locationData[0].lon)
             checkSearchOrigin(city)
@@ -142,6 +143,7 @@ var getLocationData = function(city) {
     })
 }
 
+//fetching weather for searched city based on lat and lon
 var getCurrentWeather = function(lat, lon) {
     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`)
     .then(function(response) {
@@ -153,6 +155,7 @@ var getCurrentWeather = function(lat, lon) {
     })
 }
 
+//search button click handler
 var getCity = function() {
     var newCity = citySearch.value
     getLocationData(newCity)

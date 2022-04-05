@@ -9,13 +9,13 @@
 }
 
 body {
-    background-color:rgb(20, 80, 163);
+    background-color:rgb(24, 72, 141);
     color: white;
 }
 
 header {
     background-color: blue;
-    background-image: linear-gradient(rgb(35, 150, 189), rgb(20, 80, 163));
+    background-image: linear-gradient(rgb(35, 150, 189), rgb(24, 72, 141));
     color: white;
     width: 100%;
     text-align: center;
