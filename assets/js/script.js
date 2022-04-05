@@ -69,6 +69,24 @@ var displayFiveDayWeather = function(weatherData) {
     }
 }
 
+//checking if city is already saved and not generating button or saving city if true
+var checkSearchOrigin = function (city) {
+    var loadedCities = localStorage.getItem("Cities")
+    if (!loadedCities) {
+        generateSearchBtn(city)
+        saveCity(city)
+        return
+    }
+    loadedCities = JSON.parse(loadedCities)
+    for (var i = 0; i < loadedCities.length; i++) {
+        if (city === loadedCities[i]) {
+            return
+        }
+    }
+    generateSearchBtn(city)
+    saveCity(city)
+}
+
 var cityClickHandler = function(event) {
     var cityName = event.target.getAttribute("data-city")
     getLocationData(cityName)
@@ -108,11 +126,19 @@ var generateSearchBtn = function(city) {
 var getLocationData = function(city) {
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`)
     .then(function(response) {
+        console.log(response)
         return response.json()
     })
     .then(function(locationData) {
-        getCurrentWeather(locationData[0].lat, locationData[0].lon)
-        currentCity.innerText = locationData[0].name + " (" + dayjs().format('MM/DD/YYYY') + ")"
+        console.log(locationData)
+        if (locationData.length > 0) {
+            getCurrentWeather(locationData[0].lat, locationData[0].lon)
+            checkSearchOrigin(city)
+            currentCity.innerText = locationData[0].name + " (" + dayjs().format('MM/DD/YYYY') + ")"
+        }
+        else {
+            alert("Not a valid city name")
+        }
     })
 }
 
@@ -130,8 +156,6 @@ var getCurrentWeather = function(lat, lon) {
 var getCity = function() {
     var newCity = citySearch.value
     getLocationData(newCity)
-    generateSearchBtn(newCity)
-    saveCity(newCity)
     citySearch.value = ""
 }
 

@@ -9,12 +9,13 @@
 }
 
 body {
-    background-color:rgb(80, 178, 210);
+    background-color:rgb(20, 80, 163);
+    color: white;
 }
 
 header {
     background-color: blue;
-    background-image: linear-gradient(darkblue, rgb(80, 178, 210));
+    background-image: linear-gradient(rgb(35, 150, 189), rgb(20, 80, 163));
     color: white;
     width: 100%;
     text-align: center;
@@ -50,12 +51,14 @@ main {
 
 .search-btn {
     background-color: blue;
-    background-image: linear-gradient(darkblue, rgb(80, 178, 210));
+    background-image: linear-gradient(to right,rgb(35, 150, 189), rgb(79, 111, 122));
+    box-shadow: 0 1px var(--border-radius) black;
     color: white;
 }
 
 .search button {
     border-radius: var(--border-radius);
+    box-shadow: 0 1px var(--border-radius) black;
     height: 35px;
     font-size: large;
     font-weight: bold
@@ -93,6 +96,10 @@ main {
     line-height: 2;
 }
 
+.current p {
+    font-size: 20px;
+}
+
 #uv-index {
     color: white;
     font-weight: bold;
@@ -109,28 +116,28 @@ main {
 #five-day {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 16px;
     width: 100%;
-    justify-content: space-between;
 }
 
 .card {
-    background-color: darkblue;
+    background-color: rgb(35, 150, 189);
     color: white;
     padding: 10px 10px;
     border-radius: var(--border-radius);
-    line-height: 1.5;
+    line-height: 1.8;
+    box-shadow: 0 1px var(--border-radius) black;
 }
 
 .card h3 {
-    font-size: 34px;
+    font-size: 32px;
 }
 
 .card p {
-    font-size: 24px;
+    font-size: 20px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 767px) {
     main {
         display: flex;
         flex-direction: column;
