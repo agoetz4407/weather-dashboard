@@ -138,7 +138,7 @@ var handleError = function(response) {
 
 // getting location data of city to fetch weather
 var getLocationData = function(city) {
-    fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`)
+    fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`)
     .then(handleError)
     .then(function(locationData) {
         //checking if response was valid city or not
