@@ -9,6 +9,7 @@ var currentWind = document.getElementById("wind")
 var currentHumidity = document.getElementById("humidity")
 var currentUVIndex = document.getElementById("uv-index")
 var fiveDayForecast = document.querySelector(".five-day")
+
 //displays current weather
 var displayCurrentWeather = function(weatherData) {
     var icon = document.createElement('img')
@@ -80,7 +81,9 @@ var checkSearchOrigin = function (city) {
     }
     loadedCities = JSON.parse(loadedCities)
     for (var i = 0; i < loadedCities.length; i++) {
-        if (city === loadedCities[i]) {
+        lcCurrentCity = city.toLowerCase()
+        lcLoadedCity = loadedCities[i].toLowerCase()
+        if (lcCurrentCity === lcLoadedCity) {
             return
         }
     }
@@ -123,13 +126,12 @@ var generateSearchBtn = function(city) {
     previousCities.appendChild(newButton)
     newButton.addEventListener("click", cityClickHandler)
 }
-//network error handler
+//bad request handler
 var handleError = function(response) {
-    if (!response.ok) { 
-       throw Error(response.status);
-    } else {
-       return response.json();
+    if (response.ok) {
+        return response.json()
     }
+    throw new Error('Getting information with the onecall API failed: ' + response.status)
  }
 
 // getting location data of city to fetch weather
@@ -147,18 +149,21 @@ var getLocationData = function(city) {
             alert("Not a valid city name")
         }
     })
-    .catch(console.log)
+    .catch(function(err) {
+        console.log(err)
+    })
 }
 
 //fetching weather for searched city based on lat and lon
 var getCurrentWeather = function(lat, lon) {
     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`)
-    .then(function(response) {
-        return response.json()
-    })
+    .then(handleError)
     .then(function(weatherData) {
         displayCurrentWeather(weatherData)
         displayFiveDayWeather(weatherData)
+    })
+    .catch(function(err) {
+        console.log(err)
     })
 }
 
