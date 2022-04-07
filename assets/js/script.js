@@ -165,6 +165,9 @@ var getCurrentWeather = function(lat, lon) {
 //search button click handler
 var getCity = function() {
     var newCity = citySearch.value
+    if (!newCity) {
+        return
+    }
     getLocationData(newCity)
     citySearch.value = ""
 }
