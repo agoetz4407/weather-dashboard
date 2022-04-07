@@ -15,7 +15,7 @@ var errorEl = document.getElementById("error")
 var displayCurrentWeather = function(weatherData) {
     var icon = document.createElement('img')
     var iconId = weatherData.current.weather[0].icon
-    icon.setAttribute("src", `http://openweathermap.org/img/w/${iconId}.png`)
+    icon.setAttribute("src", `https://openweathermap.org/img/w/${iconId}.png`)
     currentCity.appendChild(icon)
     currentTemp.innerText = weatherData.current.temp
     currentWind.innerText = weatherData.current.wind_speed
@@ -54,7 +54,7 @@ var displayFiveDayWeather = function(weatherData) {
          weatherCard.appendChild(date)
          let icon = document.createElement('img')
          let iconId = fiveDayArr[i].weather[0].icon
-         icon.setAttribute("src", `http://openweathermap.org/img/w/${iconId}.png`)
+         icon.setAttribute("src", `https://openweathermap.org/img/w/${iconId}.png`)
          weatherCard.appendChild(icon)
          let tempEl = document.createElement('p')
          let temp = fiveDayArr[i].temp.day
