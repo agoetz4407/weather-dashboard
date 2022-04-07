@@ -2,6 +2,7 @@
 var apiKey = "ba7e894de92ecba7bd4c5eb8943840a3"
 var citySearch = document.getElementById("city-search")
 var searchBtn = document.getElementById("search-btn")
+var formEl = document.querySelector('form')
 var previousCities = document.getElementById("previous-cities")
 var currentCity = document.getElementById("city-name")
 var currentTemp = document.getElementById("temp")
@@ -175,7 +176,8 @@ var getCurrentWeather = function(lat, lon) {
 }
 
 //search button click handler
-var getCity = function() {
+var getCity = function(event) {
+    event.preventDefault()
     errorEl.style.display = "none"
     var newCity = citySearch.value
     if (!newCity) {
@@ -188,4 +190,4 @@ var getCity = function() {
 }
 
 loadCities();
-searchBtn.addEventListener("click", getCity)
+formEl.addEventListener("submit", getCity)
