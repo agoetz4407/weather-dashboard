@@ -9,6 +9,7 @@ var currentWind = document.getElementById("wind")
 var currentHumidity = document.getElementById("humidity")
 var currentUVIndex = document.getElementById("uv-index")
 var fiveDayForecast = document.querySelector(".five-day")
+var errorEl = document.getElementById("error")
 
 //displays current weather
 var displayCurrentWeather = function(weatherData) {
@@ -92,6 +93,7 @@ var checkSearchOrigin = function (city) {
 }
 //fuction for saved city button click
 var cityClickHandler = function(event) {
+    errorEl.style.display = "none"
     var cityName = event.target.getAttribute("data-city")
     getLocationData(cityName)
 }
@@ -131,7 +133,7 @@ var handleError = function(response) {
     if (response.ok) {
         return response.json()
     }
-    throw new Error('Getting information with the onecall API failed: ' + response.status)
+    throw new Error('Getting information from API failed: ' + response.status)
  }
 
 // getting location data of city to fetch weather
@@ -146,12 +148,15 @@ var getLocationData = function(city) {
             currentCity.innerText = locationData[0].name + " (" + dayjs().format('MM/DD/YYYY') + ")"
         }
         else {
-            alert("Not a valid city name")
+            errorEl.style.display = "block"
+            errorEl.innerText = "Not a valid city name"
         }
     })
     .catch(function(err) {
         console.log(err)
-    })
+        errorEl.style.display = "block"
+        errorEl.innerText = "Network error"
+})
 }
 
 //fetching weather for searched city based on lat and lon
@@ -164,13 +169,18 @@ var getCurrentWeather = function(lat, lon) {
     })
     .catch(function(err) {
         console.log(err)
+        errorEl.style.display = "block"
+        errorEl.innerText = "Network error"
     })
 }
 
 //search button click handler
 var getCity = function() {
+    errorEl.style.display = "none"
     var newCity = citySearch.value
     if (!newCity) {
+        errorEl.style.display = "block"
+        errorEl.innerText = "Please enter a city to search"
         return
     }
     getLocationData(newCity)
